@@ -9,6 +9,12 @@
 
 #import "XCTestObservationCenter+Swizzling.h"
 #import <objc/runtime.h>
+#import <Nimble/Nimble-Swift.h>
+
+SWIFT_CLASS("_TtC6Nimble22CurrentTestCaseTracker")
+@interface CurrentTestCaseTracker : NSObject <XCTestObservation>
++ (CurrentTestCaseTracker *)sharedInstance;
+@end
 
 #pragma mark - Private
 
@@ -61,7 +67,7 @@
     // XCTestLog
     // _XCTestDriverTestObserver
 
-//    if (![testObserver isKindOfClass:NSClassFromString(@"XCTestLog")]) {
+//    if (![testObserver isKindOfClass:NSClassFromString(@"_XCTestDriverTestObserver")]) {
 //        [self xxx_addTestObserver:testObserver];
 //    }
 
@@ -73,6 +79,10 @@
 
 - (void)xxx__addLegacyTestObserver:(id <XCTestObservation>)testObserver {
     [self xxx__addLegacyTestObserver:testObserver];
+
+    // Only add CurrentTestCaseTracker once `XCTestLog` has been added
+    CurrentTestCaseTracker *tracker = [CurrentTestCaseTracker sharedInstance];
+    [self addTestObserver:tracker];
 }
 
 - (void)listTestObservers {
