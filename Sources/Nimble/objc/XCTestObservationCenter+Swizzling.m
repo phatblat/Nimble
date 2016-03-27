@@ -9,56 +9,73 @@
 
 #import "XCTestObservationCenter+Swizzling.h"
 #import <objc/runtime.h>
-#import "CleanTestObserver.h"
+
+#pragma mark - Private
+
+@interface XCTestObservationCenter (Private)
+- (void)_addLegacyTestObserver:(id)arg1;
+@end
+
+#pragma mark - XCTestObservationCenter
 
 @implementation XCTestObservationCenter (Swizzling)
 
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        Class class = [self class];
 
-        SEL originalSelector = @selector(addTestObserver:);
-        SEL swizzledSelector = @selector(xxx_addTestObserver:);
-
-        Method originalMethod = class_getInstanceMethod(class, originalSelector);
-        Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-
-        BOOL didAddMethod =
-        class_addMethod(class,
-                        originalSelector,
-                        method_getImplementation(swizzledMethod),
-                        method_getTypeEncoding(swizzledMethod));
-
-        if (didAddMethod) {
-            class_replaceMethod(class,
-                                swizzledSelector,
-                                method_getImplementation(originalMethod),
-                                method_getTypeEncoding(originalMethod));
-        } else {
-            method_exchangeImplementations(originalMethod, swizzledMethod);
-        }
+        [self swizzleSelector:@selector(addTestObserver:) withSelector:@selector(xxx_addTestObserver:)];
+        [self swizzleSelector:@selector(_addLegacyTestObserver:) withSelector:@selector(xxx__addLegacyTestObserver:)];
     });
 }
 
 #pragma mark - Method Swizzling
 
-- (void)xxx_addTestObserver:(id <XCTestObservation>)testObserver {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self removeDefaultTestLog];
++ (void)swizzleSelector:(SEL)originalSelector withSelector:(SEL)swizzledSelector {
+    Class class = [self class];
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
 
-        // Add custom selector
-        CleanTestObserver *observer = [[CleanTestObserver alloc] init];
-        [self xxx_addTestObserver:observer];
-    });
+    BOOL didAddMethod =
+    class_addMethod(class,
+                    originalSelector,
+                    method_getImplementation(swizzledMethod),
+                    method_getTypeEncoding(swizzledMethod));
 
-    if (![testObserver isKindOfClass:NSClassFromString(@"XCTestLog")]) {
-        [self xxx_addTestObserver:testObserver];
+    if (didAddMethod) {
+        class_replaceMethod(class,
+                            swizzledSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
     }
 }
 
-- (void)removeDefaultTestLog {
+- (void)xxx_addTestObserver:(id <XCTestObservation>)testObserver {
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        [self listTestObservers];
+//    });
+
+    // XCTestLog
+    // _XCTestDriverTestObserver
+
+//    if (![testObserver isKindOfClass:NSClassFromString(@"XCTestLog")]) {
+//        [self xxx_addTestObserver:testObserver];
+//    }
+
+    // Nimble.CurrentTestCaseTracker
+    // _TtC6Nimble22CurrentTestCaseTracker
+
+    [self xxx_addTestObserver:testObserver];
+}
+
+- (void)xxx__addLegacyTestObserver:(id <XCTestObservation>)testObserver {
+    [self xxx__addLegacyTestObserver:testObserver];
+}
+
+- (void)listTestObservers {
     SEL aSelector = NSSelectorFromString(@"observers");
     NSMethodSignature *signature = [[self class] instanceMethodSignatureForSelector:aSelector];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
@@ -73,9 +90,10 @@
     NSArray *observers = [returnValue allObjects];
 
     for (id object in observers) {
-        if ([object isKindOfClass:NSClassFromString(@"XCTestLog")]) {
-            [[XCTestObservationCenter sharedTestObservationCenter] removeTestObserver:object];
-        }
+//        if ([object isKindOfClass:NSClassFromString(@"XCTestLog")]) {
+//            [[XCTestObservationCenter sharedTestObservationCenter] removeTestObserver:object];
+//        }
+        NSLog(@"%@", object);
     }
 }
 
