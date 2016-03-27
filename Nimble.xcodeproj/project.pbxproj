@@ -305,6 +305,12 @@
 		DDB4D5F119FE442800E9D9FE /* MatchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */; };
 		DDEFAEB41A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
 		DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
+		F8B432101CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B4320F1CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m */; };
+		F8B432111CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B4320F1CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m */; };
+		F8B432121CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B4320F1CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m */; };
+		F8B432141CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = F8B432131CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h */; };
+		F8B432151CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = F8B432131CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h */; };
+		F8B432161CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = F8B432131CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -491,6 +497,8 @@
 		DDB4D5EC19FE43C200E9D9FE /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Match.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTest.swift; sourceTree = "<group>"; };
 		DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCAllPassTest.m; sourceTree = "<group>"; };
+		F8B4320F1CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestObservationCenter+Swizzling.m"; sourceTree = "<group>"; };
+		F8B432131CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestObservationCenter+Swizzling.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -711,6 +719,8 @@
 				8DF1C3EE1C94F7D4004B2D36 /* NMBStringify.h */,
 				8DF1C3EF1C94F7D4004B2D36 /* NMBStringify.m */,
 				AEBA646F1C5C5FD10060A057 /* CurrentTestCaseTracker.m */,
+				F8B432131CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h */,
+				F8B4320F1CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m */,
 			);
 			path = objc;
 			sourceTree = "<group>";
@@ -780,6 +790,7 @@
 			files = (
 				8DF1C3F01C94F7D4004B2D36 /* NMBStringify.h in Headers */,
 				1FD8CD601968AB07008ED995 /* DSL.h in Headers */,
+				F8B432141CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h in Headers */,
 				1FD8CD641968AB07008ED995 /* NMBExceptionCapture.h in Headers */,
 				1F1A742F1940169200FFFC47 /* Nimble.h in Headers */,
 			);
@@ -791,6 +802,7 @@
 			files = (
 				8DF1C3F21C94F7D4004B2D36 /* NMBStringify.h in Headers */,
 				1F5DF1AF1BDCA17600C3A531 /* DSL.h in Headers */,
+				F8B432161CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h in Headers */,
 				1F5DF1B01BDCA17600C3A531 /* NMBExceptionCapture.h in Headers */,
 				1F5DF1AE1BDCA17600C3A531 /* Nimble.h in Headers */,
 			);
@@ -802,6 +814,7 @@
 			files = (
 				8DF1C3F11C94F7D4004B2D36 /* NMBStringify.h in Headers */,
 				1FD8CD611968AB07008ED995 /* DSL.h in Headers */,
+				F8B432151CA774B3007B7BE3 /* XCTestObservationCenter+Swizzling.h in Headers */,
 				1FD8CD651968AB07008ED995 /* NMBExceptionCapture.h in Headers */,
 				1F925EC7195C0DD100ED456B /* Nimble.h in Headers */,
 			);
@@ -1028,6 +1041,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8B432101CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m in Sources */,
 				1FD8CD401968AB07008ED995 /* BeCloseTo.swift in Sources */,
 				1FD8CD741968AB07008ED995 /* MatcherFunc.swift in Sources */,
 				1FD8CD361968AB07008ED995 /* Expectation.swift in Sources */,
@@ -1145,6 +1159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8B432121CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m in Sources */,
 				1F5DF1791BDCA0F500C3A531 /* BeCloseTo.swift in Sources */,
 				1F5DF16C1BDCA0F500C3A531 /* AssertionRecorder.swift in Sources */,
 				1F5DF1881BDCA0F500C3A531 /* MatcherProtocols.swift in Sources */,
@@ -1236,6 +1251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8B432111CA7743C007B7BE3 /* XCTestObservationCenter+Swizzling.m in Sources */,
 				1FD8CD411968AB07008ED995 /* BeCloseTo.swift in Sources */,
 				1FD8CD751968AB07008ED995 /* MatcherFunc.swift in Sources */,
 				1FD8CD371968AB07008ED995 /* Expectation.swift in Sources */,
