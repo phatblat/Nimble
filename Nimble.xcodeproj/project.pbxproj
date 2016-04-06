@@ -311,9 +311,9 @@
 		DDB4D5F119FE442800E9D9FE /* MatchTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */; };
 		DDEFAEB41A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
 		DDEFAEB51A93CBE6005CA37A /* ObjCAllPassTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */; };
-		F8A1BE2F1CB3710900031679 /* XCTestObservationCenter+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Swizzling.m */; };
-		F8A1BE301CB3710900031679 /* XCTestObservationCenter+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Swizzling.m */; };
-		F8A1BE311CB3710900031679 /* XCTestObservationCenter+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Swizzling.m */; };
+		F8A1BE2F1CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Register.m */; };
+		F8A1BE301CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Register.m */; };
+		F8A1BE311CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Register.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -503,7 +503,7 @@
 		DDB4D5EC19FE43C200E9D9FE /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Match.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DDB4D5EF19FE442800E9D9FE /* MatchTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchTest.swift; sourceTree = "<group>"; };
 		DDEFAEB31A93CBE6005CA37A /* ObjCAllPassTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjCAllPassTest.m; sourceTree = "<group>"; };
-		F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestObservationCenter+Swizzling.m"; sourceTree = "<group>"; };
+		F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Register.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "XCTestObservationCenter+Register.m"; sourceTree = "<group>"; };
 		F8A1BE321CB3777F00031679 /* CurrentTestCaseTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentTestCaseTracker.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -578,7 +578,7 @@
 				1F1871C31CA89EDB00A34BF2 /* NMBObjCMatcher.swift */,
 				1F1871C01CA89EDB00A34BF2 /* NMBStringify.h */,
 				1F1871C11CA89EDB00A34BF2 /* NMBStringify.m */,
-				F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Swizzling.m */,
+				F8A1BE2B1CB3710900031679 /* XCTestObservationCenter+Register.m */,
 			);
 			path = ObjectiveC;
 			sourceTree = "<group>";
@@ -1064,7 +1064,7 @@
 				1FD8CD4C1968AB07008ED995 /* BeLessThan.swift in Sources */,
 				1F1871CC1CA89EDB00A34BF2 /* NMBObjCMatcher.swift in Sources */,
 				1FD8CD461968AB07008ED995 /* BeGreaterThan.swift in Sources */,
-				F8A1BE2F1CB3710900031679 /* XCTestObservationCenter+Swizzling.m in Sources */,
+				F8A1BE2F1CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */,
 				1F1871C61CA89EDB00A34BF2 /* DSL.m in Sources */,
 				1FD8CD301968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				AE7ADE451C80BF8000B94CD3 /* MatchError.swift in Sources */,
@@ -1184,7 +1184,7 @@
 				1F5DF1831BDCA0F500C3A531 /* Contain.swift in Sources */,
 				1F5DF1851BDCA0F500C3A531 /* Equal.swift in Sources */,
 				1F1871DC1CA89EF100A34BF2 /* NMBObjCMatcher.swift in Sources */,
-				F8A1BE311CB3710900031679 /* XCTestObservationCenter+Swizzling.m in Sources */,
+				F8A1BE311CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */,
 				1F5DF1711BDCA0F500C3A531 /* DSL+Wait.swift in Sources */,
 				1F1871D61CA89EEF00A34BF2 /* DSL.m in Sources */,
 				1F5DF17D1BDCA0F500C3A531 /* BeGreaterThanOrEqualTo.swift in Sources */,
@@ -1278,7 +1278,7 @@
 				1FD8CD5B1968AB07008ED995 /* Equal.swift in Sources */,
 				1FD8CD4D1968AB07008ED995 /* BeLessThan.swift in Sources */,
 				1FD8CD471968AB07008ED995 /* BeGreaterThan.swift in Sources */,
-				F8A1BE301CB3710900031679 /* XCTestObservationCenter+Swizzling.m in Sources */,
+				F8A1BE301CB3710900031679 /* XCTestObservationCenter+Register.m in Sources */,
 				1F1871DA1CA89EF100A34BF2 /* NMBObjCMatcher.swift in Sources */,
 				1FD8CD311968AB07008ED995 /* AdapterProtocols.swift in Sources */,
 				1F1871D21CA89EEE00A34BF2 /* DSL.m in Sources */,
