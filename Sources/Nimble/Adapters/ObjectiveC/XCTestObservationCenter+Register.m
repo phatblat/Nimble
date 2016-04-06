@@ -16,26 +16,47 @@
 /// This approach waits to register our custom test observer until XCTest adds its first "legacy" observer,
 /// falling back to registering after the first normal observer if this private method ever changes.
 + (void)load {
-    // Swizzle -_addLegacyTestObserver:
-    SEL originalSelector = @selector(_addLegacyTestObserver:);
-    SEL replacementSelector = @selector(NMB_original__addLegacyTestObserver:);
-    Method originalMethod = class_getInstanceMethod(self, originalSelector);
-    Method replacementMethod = class_getInstanceMethod(self, replacementSelector);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (class_getInstanceMethod([self class], @selector(_addLegacyTestObserver:))) {
+            // Swizzle -_addLegacyTestObserver:
+            [self swizzleSelector:@selector(_addLegacyTestObserver:) withSelector:@selector(NMB_original__addLegacyTestObserver:)];
+        } else {
+            // Swizzle -addTestObserver:, only if -_addLegacyTestObserver: is not implemented
+            [self swizzleSelector:@selector(addTestObserver:) withSelector:@selector(NMB_original_addTestObserver:)];
+        }
+    });
+}
 
-    if (originalMethod) {
-        class_addMethod(self, originalSelector, method_getImplementation(replacementMethod), method_getTypeEncoding(replacementMethod));
-        class_replaceMethod(self, replacementSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+#pragma mark - Method Swizzling
+
+/// Swaps the implementations between two instance methods.
+///
+/// @param originalSelector    Original method to replace.
+/// @param replacementSelector Replacement method.
++ (void)swizzleSelector:(SEL)originalSelector withSelector:(SEL)replacementSelector {
+    Class class = [self class];
+
+    Method originalMethod = class_getInstanceMethod(class, originalSelector);
+    Method replacementMethod = class_getInstanceMethod(class, replacementSelector);
+
+    BOOL didAddMethod =
+    class_addMethod(class,
+                    originalSelector,
+                    method_getImplementation(replacementMethod),
+                    method_getTypeEncoding(replacementMethod));
+
+    if (didAddMethod) {
+        class_replaceMethod(class,
+                            replacementSelector,
+                            method_getImplementation(originalMethod),
+                            method_getTypeEncoding(originalMethod));
     } else {
-        // Swizzle -addTestObserver:, only if -_addLegacyTestObserver: is not implemented
-        originalSelector = @selector(addTestObserver:);
-        replacementSelector = @selector(NMB_original_addTestObserver:);
-        originalMethod = class_getInstanceMethod(self, originalSelector);
-        replacementMethod = class_getInstanceMethod(self, replacementSelector);
-
-        class_addMethod(self, originalSelector, method_getImplementation(replacementMethod), method_getTypeEncoding(replacementMethod));
-        class_replaceMethod(self, replacementSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod));
+        method_exchangeImplementations(originalMethod, replacementMethod);
     }
 }
+
+#pragma mark - Replacement Methods
 
 /// Registers `CurrentTestCaseTracker` as a test observer after `XCTestLog` has been added.
 - (void)NMB_original__addLegacyTestObserver:(id)observer {
