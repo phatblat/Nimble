@@ -69,7 +69,7 @@ public class NMBObjCBeCloseToMatcher: NSObject, NMBMatcher {
 }
 
 extension NMBObjCMatcher {
-    public class func beCloseToMatcher(_ expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
+    @objc public class func beCloseToMatcher(_ expected: NSNumber, within: CDouble) -> NMBObjCBeCloseToMatcher {
         return NMBObjCBeCloseToMatcher(expected: expected, within: within)
     }
 }
