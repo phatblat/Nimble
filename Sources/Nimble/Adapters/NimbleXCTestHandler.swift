@@ -35,7 +35,7 @@ class NimbleXCTestUnavailableHandler: AssertionHandler {
     }
 }
 
-#if !SWIFT_PACKAGE
+#if _runtime(_ObjC)
 /// Helper class providing access to the currently executing XCTestCase instance, if any
 @objc final internal class CurrentTestCaseTracker: NSObject, XCTestObservation {
     @objc static let sharedInstance = CurrentTestCaseTracker()
@@ -62,7 +62,7 @@ func isXCTestAvailable() -> Bool {
 }
 
 private func recordFailure(_ message: String, location: SourceLocation) {
-#if SWIFT_PACKAGE
+#if !_runtime(_ObjC)
     XCTFail("\(message)", file: location.file, line: location.line)
 #else
     if let testCase = CurrentTestCaseTracker.sharedInstance.currentTestCase {
